@@ -63,13 +63,10 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . /index.php [L]
 </IfModule>
 
-<Files .htaccess>
-order allow,deny deny from all
+<Files wp-config.php>
+order allow,deny 
+deny from all
 </Files>
-
-<files wp-config.php>
-order allow,deny deny from all
-</files>
 
 Options All -Indexes
 _EOF_
@@ -126,5 +123,5 @@ else
   fi
 fi
 
-echo -n "Now, go to your WordPress site to finish installation!"
+echo -n "Now, go to your new WordPress and finish the installation!"
 echo ""
