@@ -1,0 +1,36 @@
+#!/bin/bash
+#Will disable all the email notifications from CSF and LFD
+
+echo "-----------------------------------------------------------"
+echo "------------   Disabling e-mail notifications  ------------"
+echo "-----------------------------------------------------------"
+sed -i 's/PT_USERTIME = "1800"/PT_USERTIME = "0"/g' /etc/csf/csf.conf
+sed -i 's/PT_USERRSS = "256"/PT_USERRSS = "0"/g' /etc/csf/csf.conf
+sed -i 's/PT_USERMEM = "512"/PT_USERMEM = "0"/g' /etc/csf/csf.conf
+sed -i 's/PT_USERPROC = "10"/PT_USERPROC = "0"/g' /etc/csf/csf.conf
+sed -i 's/LF_INTEGRITY = "3600"/LF_INTEGRITY = "0"/g' /etc/csf/csf.conf
+sed -i 's/PT_LIMIT = "60"/PT_LIMIT = "0"/g' /etc/csf/csf.conf
+sed -i 's/LF_EMAIL_ALERT = "1"/LF_EMAIL_ALERT = "0"/g' /etc/csf/csf.conf
+sed -i 's/LF_PERMBLOCK_ALERT = "1"/LF_PERMBLOCK_ALERT = "0"/g' /etc/csf/csf.conf
+sed -i 's/LF_NETBLOCK_ALERT = "1"/LF_NETBLOCK_ALERT = "0"/g' /etc/csf/csf.conf
+sed -i 's/LF_DISTFTP_ALERT = "1"/LF_DISTFTP_ALERT = "0"/g' /etc/csf/csf.conf
+sed -i 's/LF_DISTSMTP_ALERT = "1"/LF_DISTSMTP_ALERT = "0"/g' /etc/csf/csf.conf
+sed -i 's/LT_EMAIL_ALERT = "1"/LT_EMAIL_ALERT = "0"/g' /etc/csf/csf.conf
+sed -i 's/CT_EMAIL_ALERT = "1"/CT_EMAIL_ALERT = "0"/g' /etc/csf/csf.conf
+sed -i 's/PT_USERKILL_ALERT = "1"/PT_USERKILL_ALERT = "0"/g' /etc/csf/csf.conf
+sed -i 's/PS_EMAIL_ALERT = "1"/PS_EMAIL_ALERT = "0"/g' /etc/csf/csf.conf
+sed -i 's/RECAPTCHA_ALERT = "1"/RECAPTCHA_ALERT = "0"/g' /etc/csf/csf.conf
+sed -i 's/LF_SSH_EMAIL_ALERT = "1"/LF_SSH_EMAIL_ALERT = "0"/g' /etc/csf/csf.conf
+sed -i 's/LF_SU_EMAIL_ALERT = "1"/LF_SU_EMAIL_ALERT = "0"/g' /etc/csf/csf.conf
+sed -i 's/LF_WEBMIN_EMAIL_ALERT = "1"/LF_WEBMIN_EMAIL_ALERT = "0"/g' /etc/csf/csf.conf
+sed -i 's/LF_CONSOLE_EMAIL_ALERT = "1"/LF_CONSOLE_EMAIL_ALERT = "0"/g' /etc/csf/csf.conf
+sed -i 's/RT_RELAY_ALERT = "1"/RT_RELAY_ALERT = "0"/g' /etc/csf/csf.conf
+sed -i 's/RT_AUTHRELAY_ALERT = "1"/RT_AUTHRELAY_ALERT = "0"/g' /etc/csf/csf.conf
+sed -i 's/RT_LOCALRELAY_ALERT = "1"/RT_LOCALRELAY_ALERT = "0"/g' /etc/csf/csf.conf
+sed -i 's/RT_LOCALHOSTRELAY_ALERT = "1"/RT_LOCALHOSTRELAY_ALERT = "0"/g' /etc/csf/csf.conf
+
+for i in csf lfd; do systemctl restart $i; sleep 5 ; systemctl status $i; done
+csf -r
+echo "-----------------------------------------------------------"
+echo "-------------   This has been completed.  -----------------"
+echo "-----------------------------------------------------------"
